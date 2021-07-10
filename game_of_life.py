@@ -11,8 +11,8 @@ HEIGHT = 100
 WIDTH = 100
 
 # OTHER PARAMS
-MAP_COUNT = 100
-EPOCHS = 100
+MAP_COUNT = 100 # NUMBER OF CONWAY'S GAME OF LIFE SIMULATIONS THAT NEED TO BE ADDED
+EPOCHS = 100    # NUMBER OF GENERATIONS
 
 # GRID AND IT'S CORRESPONDING EQUIVALENCY VALUES
 grid = [[0 for i in range(WIDTH)] for j in range(HEIGHT)]
@@ -69,13 +69,16 @@ def updateGrid():
 
 
 
-
+# NUMBER OF RANDOM START POINTS ON THE GRID
 startLocations = 400
 
-
+# FUNCTION TO RETURN THE HEIGHT VALUES FOR THE MAP
 def generateMaps():
+
+	# NUMBER OF CONWAY'S GAME OF LIFE SIMULATIONS THAT NEED TO BE ADDED
 	for _ in range(MAP_COUNT):
 
+		# GENERATING THE RANDOM START POINTS
 		for i in range(startLocations):
 			random.seed()
 			valueWidth = random.randint(0, WIDTH-1)
@@ -83,14 +86,13 @@ def generateMaps():
 			valueHeight = random.randint(0, HEIGHT-1)
 			grid[valueHeight][valueWidth] = 1
 
-
+		# RUNNING THE EPOCHS
 		for i in range(EPOCHS + 1):
-			print("Epoch: " + str(i))
 			updateGrid()
 
+		# ADDING THE FINAL GENERATION
 		for row in range(0, HEIGHT):
 			for column in range(0, WIDTH):
 				heights[row][column] += grid[row][column]
 
 	return heights
-	# TODO: Gaussain smooth the heights and make a 3D map
