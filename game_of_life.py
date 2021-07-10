@@ -68,24 +68,29 @@ def updateGrid():
 					grid[row][column] = 1
 
 
+
+
 startLocations = 400
 
-for _ in range(MAP_COUNT):
 
-	for i in range(startLocations):
-		random.seed()
-		valueWidth = random.randint(0, WIDTH-1)
-		random.seed()
-		valueHeight = random.randint(0, HEIGHT-1)
-		grid[valueHeight][valueWidth] = 1
+def generateMaps():
+	for _ in range(MAP_COUNT):
+
+		for i in range(startLocations):
+			random.seed()
+			valueWidth = random.randint(0, WIDTH-1)
+			random.seed()
+			valueHeight = random.randint(0, HEIGHT-1)
+			grid[valueHeight][valueWidth] = 1
 
 
-	for i in range(EPOCHS + 1):
-		print("Epoch: " + str(i))
-		updateGrid()
+		for i in range(EPOCHS + 1):
+			print("Epoch: " + str(i))
+			updateGrid()
 
-	for row in range(0, HEIGHT):
-		for column in range(0, WIDTH):
-			heights[row][column] += grid[row][column]
+		for row in range(0, HEIGHT):
+			for column in range(0, WIDTH):
+				heights[row][column] += grid[row][column]
 
-# TODO: Gaussain smooth the heights and make a 3D map
+	return heights
+	# TODO: Gaussain smooth the heights and make a 3D map
